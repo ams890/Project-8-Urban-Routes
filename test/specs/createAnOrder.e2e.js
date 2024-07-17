@@ -53,6 +53,7 @@ describe('Create an order', () => {
         const blanketAndHandkerchiefsButton = await $(page.blanketAndHandkerchiefsButton);
         await blanketAndHandkerchiefsButton.waitForDisplayed();
         await blanketAndHandkerchiefsButton.click();
+        // eslint-disable-next-line wdio/no-pause
         await browser.pause(5000);
         await expect($(page.blanketSwitch)).toBeChecked();
     })
