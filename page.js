@@ -4,13 +4,29 @@ module.exports = {
     toField: '#to',
     phoneNumberField: '#phone',
     codeField: '#code',
+    cardNumberField: '#number.card-input',
+    cvvCodeField: '#code.card-input', 
+    messageForDriverField: '#comment',
+    iceCreamValue: '.counter-value',
     // Buttons
     callATaxiButton: 'button=Call a taxi',
     phoneNumberButton: '//div[starts-with(text(), "Phone number")]',
     nextButton: 'button=Next',
     confirmButton: 'button=Confirm',
+    supportivePlanButton: 'div=Supportive',
+    linkButton: 'button=Link',
+    paymentMethodButton: '.pp-text',
+    addCardButton: 'div=Add card',
+    closePaymentMethodModalButton: '.payment-picker .section.active .close-button',
+    paymentMethodAddedCard: 'div=Card',
+    blanketAndHandkerchiefsButton: '.r-sw',
+    blanketSwitch: '.switch-input',
+    iceCreamAddButton: 'div=+',
+    orderButton: '.smart-button',
     // Modals
     phoneNumberModal: '.modal',
+    paymentMethodModal: '.payment-picker.modal',
+    carSearchModal: '.order-header-content',
     // Functions
     fillAddresses: async function(from, to) {
         const fromField = await $(this.fromField);
@@ -48,4 +64,44 @@ module.exports = {
         await codeField.setValue(code)
         await $(this.confirmButton).click()
     },
+    supportivePlanSelect: async function() {
+        const supportivePlanButton = await $(this.supportivePlanButton);
+        await supportivePlanButton.waitForDisplayed();
+        supportivePlanButton.click();
+        return supportivePlanButton;
+    },
+    fillCardNumber: async function (cardNumber) {
+        const paymentMethodButton = await $(this.paymentMethodButton);
+        await paymentMethodButton.waitForDisplayed();
+        await paymentMethodButton.click();
+        //const paymentMethodModal = await $(this.paymentMethodModal);
+        //await paymentMethodModal.waitForDisplayed();
+        const addCardButton = await $(this.addCardButton)
+        await addCardButton.waitForDisplayed();
+        await addCardButton.click();
+        const cardNumberField = await $(this.cardNumberField);
+        await cardNumberField.click();
+        await cardNumberField.setValue(cardNumber);
+    },
+
+    fillCvvCode: async function (cvvCode) {
+        const cvvCodeField = await $(this.cvvCodeField);
+        await cvvCodeField.waitForDisplayed();
+        await cvvCodeField.setValue(cvvCode);
+        await browser.keys('Tab');
+        const linkButton = await $(this.linkButton);
+        await linkButton.waitForDisplayed();
+        await expect(linkButton).not.toHaveElementClass('disabled'); //got rid of .ParentElement after linkButton, check again later
+        await linkButton.click();
+        const closePaymentMethodModalButton = await $(this.closePaymentMethodModalButton);
+        await closePaymentMethodModalButton.waitForDisplayed();
+        await closePaymentMethodModalButton.click();
+    },
+
+    fillMessageForDriver: async function(message) {
+        const messageForDriverField = await $(this.messageForDriverField);
+        await messageForDriverField.waitForDisplayed();
+        await messageForDriverField.scrollIntoView();
+        await messageForDriverField.setValue(message);
+    }
 };
