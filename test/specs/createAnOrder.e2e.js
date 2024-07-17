@@ -29,8 +29,6 @@ describe('Create an order', () => {
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
         await page.fillCardNumber('1234 5678 9101');
         await page.fillCvvCode('15');
-        //the card icon should exist (alternative method)
-        //await expect(await $('pp-value-text').innerText).toBe('Card');
         await expect(await $(`${page.paymentMethodAddedCard}`)).toBeExisting();
     })
 
@@ -75,6 +73,10 @@ describe('Create an order', () => {
     it('should make the car search modal appear', async () => {
         await browser.url(`/`)
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const phoneNumber = helper.getPhoneNumber('+1');
+        await page.submitPhoneNumber(phoneNumber);
+        await page.fillCardNumber('1234 5678 9101');
+        await page.fillCvvCode('15');
         const orderButton = await $(page.orderButton);
         await orderButton.waitForDisplayed();
         await orderButton.click();
