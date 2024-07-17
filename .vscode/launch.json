@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Mode",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        //"runtimeExecutable": "C:/NodeJS",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "wdio"],
+        "outputCapture": "std"
+      }
+    ]
+  }

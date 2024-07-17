@@ -77,6 +77,10 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await page.fillCardNumber('1234 5678 9101');
         await page.fillCvvCode('15');
+        const messageForDriverField = await $(page.messageForDriverField);
+        await messageForDriverField.waitForDisplayed();
+        await messageForDriverField.scrollIntoView();
+        await messageForDriverField.setValue('Please text me upon arrival');
         const orderButton = await $(page.orderButton);
         await orderButton.waitForDisplayed();
         await orderButton.click();
