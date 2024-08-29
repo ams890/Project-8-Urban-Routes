@@ -20,14 +20,13 @@ In the page.js file, you will find all the CSS selectors and XPath locators I us
 In the helper.js file, you'll see the JS module import functions that helped generate a random phoneNumber and getElementByText. 
 
 ## TEST INSTRUCTIONS
-Follow these steps to run each test.
-
 Pre-conditions:
 - Start the server to make sure it is active
 - Copy/paste the server URL into the baseURL of the wdio.config.js file (line 31)
 
-1) In Visual Studio code, open a new Terminal window
-2) In terminal, navigate to the correct folder by typing the command and pressing Return:
+Test Steps:
+1. In Visual Studio code, open a new Terminal window
+2. In terminal, navigate to the correct folder by typing the command and pressing Return:
     cd hm08-qa-us
-3) To run the tests, type the following command and pressing Return:
+3. To run the tests, type the following command and pressing Return:
     npm run wdio
